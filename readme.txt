@@ -1,0 +1,1 @@
+first import the both sql files and then start the project using localhost:/
