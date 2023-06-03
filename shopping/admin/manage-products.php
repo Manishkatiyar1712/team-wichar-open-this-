@@ -2,9 +2,10 @@
 <?php
 session_start();
 include('include/config.php');
-if(strlen($_SESSION['alogin'])==0)
+$uid=$_SESSION['id'];
+if(strlen($_SESSION['login'])==0)
 	{	
-header('location:index.php');
+header('location:../login.php');
 }
 else{
 date_default_timezone_set('Asia/Kolkata');// change according timezone
@@ -41,7 +42,15 @@ if(isset($_GET['del']))
 
 	<div class="module">
 							<div class="module-head">
-								<h3>Manage Products</h3>
+								<h3>Manage Books</h3>
+                                <div class="nopro">
+                    <span class="noprp">total uploads: <?php $que=mysqli_query($con,"select count(*) from products where user_id=$uid");
+								$res=mysqli_fetch_array($que);
+								echo $res[0];
+;								?></span>
+						
+		            </div>
+                                
 							</div>
 							<div class="module-body table">
 	<?php if(isset($_GET['del']))
@@ -59,17 +68,17 @@ if(isset($_GET['del']))
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>Product Name</th>
+											<th>book Name</th>
 											<th>Category </th>
 											<th>Subcategory</th>
-											<th>Company Name</th>
-											<th>Product Creation Date</th>
+											<th>publisher Name</th>
+											<th>Creation Date</th>
 											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
 
-<?php $query=mysqli_query($con,"select products.*,category.categoryName,subcategory.subcategory from products join category on category.id=products.category join subcategory on subcategory.id=products.subCategory");
+<?php $query=mysqli_query($con,"select products.*,category.categoryName,subcategory.subcategory from products join category on category.id=products.category join subcategory on subcategory.id=products.subCategory where products.user_id=$uid");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
 {
@@ -82,7 +91,7 @@ while($row=mysqli_fetch_array($query))
 											<td><?php echo htmlentities($row['productCompany']);?></td>
 											<td><?php echo htmlentities($row['postingDate']);?></td>
 											<td>
-											<a href="edit-products.php?id=<?php echo $row['id']?>" ><i class="icon-edit"></i></a>
+											
 											<a href="manage-products.php?id=<?php echo $row['id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')"><i class="icon-remove-sign"></i></a></td>
 										</tr>
 										<?php $cnt=$cnt+1; } ?>

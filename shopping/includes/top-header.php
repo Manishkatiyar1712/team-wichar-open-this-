@@ -17,7 +17,7 @@
 					<li><a href="my-account.php"><i class="icon fa fa-user"></i>My Account</a></li>
 					<li><a href="my-wishlist.php"><i class="icon fa fa-heart"></i>Wishlist</a></li>
 					<li><a href="my-cart.php"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-                    <li><a href="admin/index.php"><i class="icon fa fa-user"></i>ADMIN login</a></li>
+                    <li>
 					<?php if(strlen($_SESSION['login'])==0)
     {   ?>
 <li><a href="login.php"><i class="icon fa fa-sign-in"></i>Login</a></li>
@@ -29,17 +29,6 @@ else{ ?>
 				</ul>
 			</div><!-- /.cnt-account -->
 
-<div class="cnt-block">
-				<ul class="list-unstyled list-inline">
-					<li class="dropdown dropdown-small">
-						<a href="track-orders.php" class="dropdown-toggle" ><span class="key">Track Order</b></a>
-						
-					</li>
-
-				
-				</ul>
-			</div>
-			
 			<div class="clearfix"></div>
 		</div><!-- /.header-top-inner -->
 	</div><!-- /.container -->

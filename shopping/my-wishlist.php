@@ -1,6 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
+
 include('includes/config.php');
 if(strlen($_SESSION['login'])==0)
     {   
@@ -118,7 +119,7 @@ header('location:my-wishlist.php');
 			</thead>
 			<tbody>
 <?php
-$ret=mysqli_query($con,"select products.productName as pname,products.productName as proid,products.productImage1 as pimage,products.productPrice as pprice,wishlist.productId as pid,wishlist.id as wid from wishlist join products on products.id=wishlist.productId where wishlist.userId='".$_SESSION['id']."'");
+$ret=mysqli_query($con,"select products.productName as pname,products.productName as proid,products.productImage1 as pimage,products.productbook as pprice,wishlist.productId as pid,wishlist.id as wid from wishlist join products on products.id=wishlist.productId where wishlist.userId='".$_SESSION['id']."'");
 $num=mysqli_num_rows($ret);
 	if($num>0)
 	{
@@ -127,27 +128,19 @@ while ($row=mysqli_fetch_array($ret)) {
 ?>
 
 				<tr>
-					<td class="col-md-2"><img src="admin/productimages/<?php echo htmlentities($row['pid']);?>/<?php echo htmlentities($row['pimage']);?>" alt="<?php echo htmlentities($row['pname']);?>" width="60" height="100"></td>
+                
+					<td class="col-md-2"><img src="admin/productimages/<?php echo htmlentities($row['pid']);?>/<?php echo htmlentities($row['pimage']);?>" alt="<?php echo htmlentities($row['pname']); $val=$row['pname'];?>" width="60" height="100"></td>
 					<td class="col-md-6">
-						<div class="product-name"><a href="product-details.php?pid=<?php echo htmlentities($pd=$row['pid']);?>"><?php echo htmlentities($row['pname']);?></a></div>
+						<div class="product-name"><a href="search-result.php?pid=<?php $_SESSION['param'] = $val;
+header('Location: other_page.php');;
+ echo htmlentities($pd=$row['pid']);?>"><?php echo htmlentities($row['pname']);?></a></div>
 <?php $rt=mysqli_query($con,"select * from productreviews where productId='$pd'");
 $num=mysqli_num_rows($rt);
 {
 ?>
-
-						<div class="rating">
-							<i class="fa fa-star rate"></i>
-							<i class="fa fa-star rate"></i>
-							<i class="fa fa-star rate"></i>
-							<i class="fa fa-star rate"></i>
-							<i class="fa fa-star non-rate"></i>
-							<span class="review">( <?php echo htmlentities($num);?> Reviews )</span>
-						</div>
-						<?php } ?>
-						<div class="price">Rs. 
-							<?php echo htmlentities($row['pprice']);?>.00
-							<span>$900.00</span>
-						</div>
+<?php } ?>
+						<div class="price"><?php echo htmlentities($row['pprice']);?>
+					  </div>
 					</td>
 					<td class="col-md-2">
 						<a href="my-wishlist.php?page=product&action=add&id=<?php echo $row['pid']; ?>" class="btn-upper btn btn-primary">Add to cart</a>

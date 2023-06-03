@@ -2,26 +2,23 @@
 <?php
 session_start();
 include('include/config.php');
-if(strlen($_SESSION['alogin'])==0)
+if(strlen($_SESSION['login'])==0)
 	{	
-header('location:index.php');
+header('location:../login.php');
 }
 else{
 	
 if(isset($_POST['submit']))
 {
+	$uid=$_SESSION['id'];
 	$category=$_POST['category'];
 	$subcat=$_POST['subcategory'];
 	$productname=$_POST['productName'];
 	$productcompany=$_POST['productCompany'];
-	$productprice=$_POST['productprice'];
-	$productpricebd=$_POST['productpricebd'];
+	$productBook=$_POST['productBook'];
 	$productdescription=$_POST['productDescription'];
-	$productscharge=$_POST['productShippingcharge'];
 	$productavailability=$_POST['productAvailability'];
 	$productimage1=$_FILES["productimage1"]["name"];
-	$productimage2=$_FILES["productimage2"]["name"];
-	$productimage3=$_FILES["productimage3"]["name"];
 //for getting product id
 $query=mysqli_query($con,"select max(id) as pid from products");
 	$result=mysqli_fetch_array($query);
@@ -32,9 +29,7 @@ if(!is_dir($dir)){
 	}
 
 	move_uploaded_file($_FILES["productimage1"]["tmp_name"],"productimages/$productid/".$_FILES["productimage1"]["name"]);
-	move_uploaded_file($_FILES["productimage2"]["tmp_name"],"productimages/$productid/".$_FILES["productimage2"]["name"]);
-	move_uploaded_file($_FILES["productimage3"]["tmp_name"],"productimages/$productid/".$_FILES["productimage3"]["name"]);
-$sql=mysqli_query($con,"insert into products(category,subCategory,productName,productCompany,productPrice,productDescription,shippingCharge,productAvailability,productImage1,productImage2,productImage3,productPriceBeforeDiscount) values('$category','$subcat','$productname','$productcompany','$productprice','$productdescription','$productscharge','$productavailability','$productimage1','$productimage2','$productimage3','$productpricebd')");
+$sql=mysqli_query($con,"insert into products(category,subCategory,productName,productCompany,productBook,productDescription,productAvailability,productImage1,user_id) values('$category','$subcat','$productname','$productcompany','$productBook','$productdescription','$productavailability','$productimage1','$uid')");
 $_SESSION['msg']="Product Inserted Successfully !!";
 
 }
@@ -86,7 +81,7 @@ $("#suggesstion-box").hide();
 
 						<div class="module">
 							<div class="module-head">
-								<h3>Insert Product</h3>
+								<h3>Insert Book</h3>
 							</div>
 							<div class="module-body">
 
@@ -137,49 +132,36 @@ while($row=mysqli_fetch_array($query))
 
 
 <div class="control-group">
-<label class="control-label" for="basicinput">Product Name</label>
+<label class="control-label" for="basicinput">Book Name</label>
 <div class="controls">
-<input type="text"    name="productName"  placeholder="Enter Product Name" class="span8 tip" required>
+<input type="text"    name="productName"  placeholder="Enter Book Name" class="span8 tip" required>
 </div>
 </div>
 
 <div class="control-group">
-<label class="control-label" for="basicinput">Product Company</label>
+<label class="control-label" for="basicinput">Publisher</label>
 <div class="controls">
-<input type="text"    name="productCompany"  placeholder="Enter Product Comapny Name" class="span8 tip" required>
+<input type="text"    name="productCompany"  placeholder="Enter Publisher Name" class="span8 tip" required>
 </div>
 </div>
 <div class="control-group">
-<label class="control-label" for="basicinput">Product Price Before Discount</label>
+<label class="control-label" for="basicinput">Exchange book</label>
 <div class="controls">
-<input type="text"    name="productpricebd"  placeholder="Enter Product Price" class="span8 tip" required>
+<input type="text"    name="productBook"  placeholder="Enter book needed" class="span8 tip" required>
 </div>
 </div>
 
-<div class="control-group">
-<label class="control-label" for="basicinput">Product Price After Discount(Selling Price)</label>
-<div class="controls">
-<input type="text"    name="productprice"  placeholder="Enter Product Price" class="span8 tip" required>
-</div>
-</div>
+
 
 <div class="control-group">
-<label class="control-label" for="basicinput">Product Description</label>
+<label class="control-label" for="basicinput">Book Description</label>
 <div class="controls">
-<textarea  name="productDescription"  placeholder="Enter Product Description" rows="6" class="span8 tip">
+<textarea  name="productDescription"  placeholder="anything about book" rows="6" class="span8 tip">
 </textarea>  
 </div>
 </div>
-
 <div class="control-group">
-<label class="control-label" for="basicinput">Product Shipping Charge</label>
-<div class="controls">
-<input type="text"    name="productShippingcharge"  placeholder="Enter Product Shipping Charge" class="span8 tip" required>
-</div>
-</div>
-
-<div class="control-group">
-<label class="control-label" for="basicinput">Product Availability</label>
+  <label class="control-label" for="basicinput">availability</label>
 <div class="controls">
 <select   name="productAvailability"  id="productAvailability" class="span8 tip" required>
 <option value="">Select</option>
@@ -192,28 +174,14 @@ while($row=mysqli_fetch_array($query))
 
 
 <div class="control-group">
-<label class="control-label" for="basicinput">Product Image1</label>
+<label class="control-label" for="basicinput">Image</label>
 <div class="controls">
 <input type="file" name="productimage1" id="productimage1" value="" class="span8 tip" required>
 </div>
 </div>
 
 
-<div class="control-group">
-<label class="control-label" for="basicinput">Product Image2</label>
-<div class="controls">
-<input type="file" name="productimage2"  class="span8 tip" required>
-</div>
-</div>
 
-
-
-<div class="control-group">
-<label class="control-label" for="basicinput">Product Image3</label>
-<div class="controls">
-<input type="file" name="productimage3"  class="span8 tip">
-</div>
-</div>
 
 	<div class="control-group">
 											<div class="controls">

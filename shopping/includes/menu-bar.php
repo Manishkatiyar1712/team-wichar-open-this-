@@ -28,7 +28,8 @@ while($row=mysqli_fetch_array($sql))
 			</li>
 			<?php } ?>
             <li class="active dropdown yamm-fw">
-				<a href="upload.php" data-hover="dropdown" class="dropdown-toggle">Upload</a>
+			<a href="admin/insert-product.php" data-hover="dropdown" class="dropdown-toggle">Upload</a>
+			
 
 			
 		</ul><!-- /.navbar-nav -->

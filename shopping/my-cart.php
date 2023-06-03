@@ -152,7 +152,7 @@ echo "<script>alert('Shipping Address has been updated');</script>";
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href="#">Home</a></li>
-				<li class='active'>Shopping Cart</li>
+				<li class='active'>Book Cart</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
@@ -173,12 +173,12 @@ if(!empty($_SESSION['cart'])){
 				<tr>
 					<th class="cart-romove item">Remove</th>
 					<th class="cart-description item">Image</th>
-					<th class="cart-product-name item">Product Name</th>
+					<th class="cart-product-name item">Book Name</th>
 			
 					<th class="cart-qty item">Quantity</th>
-					<th class="cart-sub-total item">Price Per unit</th>
-					<th class="cart-sub-total item">Shipping Charge</th>
-					<th class="cart-total last-item">Grandtotal</th>
+					<th class="cart-sub-total item">Book for exchange</th>
+					<th class="cart-sub-total item">&nbsp;</th>
+					<th class="cart-total last-item">&nbsp;</th>
 				</tr>
 			</thead><!-- /thead -->
 			<tfoot>
@@ -186,7 +186,7 @@ if(!empty($_SESSION['cart'])){
 					<td colspan="7">
 						<div class="shopping-cart-btn">
 							<span class="">
-								<a href="index.php" class="btn btn-upper btn-primary outer-left-xs">Continue Shopping</a>
+								<a href="index.php" class="btn btn-upper btn-primary outer-left-xs">Back to start</a>
 								<input type="submit" name="submit" value="Update shopping cart" class="btn btn-upper btn-primary pull-right outer-right-xs">
 							</span>
 						</div><!-- /.shopping-cart-btn -->
@@ -229,36 +229,27 @@ $_SESSION['sid']=$pd;
 						 ?></a></h4>
 						<div class="row">
 							<div class="col-sm-4">
-								<div class="rating rateit-small"></div>
-							</div>
+								
+						  </div>
 							<div class="col-sm-8">
 <?php $rt=mysqli_query($con,"select * from productreviews where productId='$pd'");
 $num=mysqli_num_rows($rt);
 {
 ?>
 								<div class="reviews">
-									( <?php echo htmlentities($num);?> Reviews )
-								</div>
+									
+							  </div>
 								<?php } ?>
-							</div>
+						  </div>
 						</div><!-- /.row -->
 						
-					</td>
-					<td class="cart-product-quantity">
-						<div class="quant-input">
-				                <div class="arrows">
-				                  <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
-				                  <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
-				                </div>
-				             <input type="text" value="<?php echo $_SESSION['cart'][$row['id']]['quantity']; ?>" name="quantity[<?php echo $row['id']; ?>]">
-				             
-			              </div>
-		            </td>
-					<td class="cart-product-sub-total"><span class="cart-sub-total-price"><?php echo "Rs"." ".$row['productPrice']; ?>.00</span></td>
-<td class="cart-product-sub-total"><span class="cart-sub-total-price"><?php echo "Rs"." ".$row['shippingCharge']; ?>.00</span></td>
+				  </td>
+					<td class="cart-product-quantity">1</td>
+					<td class="cart-product-sub-total"><span class="cart-sub-total-price"><?php echo $row['productBook']; ?></span></td>
+<td class="cart-product-sub-total">&nbsp;</td>
 
-					<td class="cart-product-grand-total"><span class="cart-grand-total-price"><?php echo ($_SESSION['cart'][$row['id']]['quantity']*$row['productPrice']+$row['shippingCharge']); ?>.00</span></td>
-				</tr>
+					<td class="cart-product-grand-total">&nbsp;</td>
+			  </tr>
 
 				<?php } }
 $_SESSION['pid']=$pdtid;
@@ -268,128 +259,17 @@ $_SESSION['pid']=$pdtid;
 		</table><!-- /table -->
 		
 	</div>
-</div><!-- /.shopping-cart-table -->			<div class="col-md-4 col-sm-12 estimate-ship-tax">
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>
-					<span class="estimate-title">Shipping Address</span>
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-				<tr>
-					<td>
-						<div class="form-group">
-<?php
-$query=mysqli_query($con,"select * from users where id='".$_SESSION['id']."'");
-while($row=mysqli_fetch_array($query))
-{
-?>
-
-<div class="form-group">
-					    <label class="info-title" for="Billing Address">Billing Address<span>*</span></label>
-					    <textarea class="form-control unicase-form-control text-input"  name="billingaddress" required="required"><?php echo $row['billingAddress'];?></textarea>
-					  </div>
-
-
-
-						<div class="form-group">
-					    <label class="info-title" for="Billing State ">Billing State  <span>*</span></label>
-			 <input type="text" class="form-control unicase-form-control text-input" id="bilingstate" name="bilingstate" value="<?php echo $row['billingState'];?>" required>
-					  </div>
-					  <div class="form-group">
-					    <label class="info-title" for="Billing City">Billing City <span>*</span></label>
-					    <input type="text" class="form-control unicase-form-control text-input" id="billingcity" name="billingcity" required="required" value="<?php echo $row['billingCity'];?>" >
-					  </div>
- <div class="form-group">
-					    <label class="info-title" for="Billing Pincode">Billing Pincode <span>*</span></label>
-					    <input type="text" class="form-control unicase-form-control text-input" id="billingpincode" name="billingpincode" required="required" value="<?php echo $row['billingPincode'];?>" >
-					  </div>
-
-
-					  <button type="submit" name="update" class="btn-upper btn btn-primary checkout-page-button">Update</button>
-			
-					<?php } ?>
-		
-						</div>
-					
-					</td>
-				</tr>
-		</tbody><!-- /tbody -->
-	</table><!-- /table -->
-</div>
-
-<div class="col-md-4 col-sm-12 estimate-ship-tax">
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>
-					<span class="estimate-title">Billing Address</span>
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-				<tr>
-					<td>
-						<div class="form-group">
-		<?php
-$query=mysqli_query($con,"select * from users where id='".$_SESSION['id']."'");
-while($row=mysqli_fetch_array($query))
-{
-?>
-
-<div class="form-group">
-					    <label class="info-title" for="Shipping Address">Shipping Address<span>*</span></label>
-					    <textarea class="form-control unicase-form-control text-input"  name="shippingaddress" required="required"><?php echo $row['shippingAddress'];?></textarea>
-					  </div>
-
-
-
-						<div class="form-group">
-					    <label class="info-title" for="Billing State ">Shipping State  <span>*</span></label>
-			 <input type="text" class="form-control unicase-form-control text-input" id="shippingstate" name="shippingstate" value="<?php echo $row['shippingState'];?>" required>
-					  </div>
-					  <div class="form-group">
-					    <label class="info-title" for="Billing City">Shipping City <span>*</span></label>
-					    <input type="text" class="form-control unicase-form-control text-input" id="shippingcity" name="shippingcity" required="required" value="<?php echo $row['shippingCity'];?>" >
-					  </div>
- <div class="form-group">
-					    <label class="info-title" for="Billing Pincode">Shipping Pincode <span>*</span></label>
-					    <input type="text" class="form-control unicase-form-control text-input" id="shippingpincode" name="shippingpincode" required="required" value="<?php echo $row['shippingPincode'];?>" >
-					  </div>
-
-
-					  <button type="submit" name="shipupdate" class="btn-upper btn btn-primary checkout-page-button">Update</button>
-					<?php } ?>
-
-		
-						</div>
-					
-					</td>
-				</tr>
-		</tbody><!-- /tbody -->
-	</table><!-- /table -->
+</div><!-- /.shopping-cart-table -->			<div class="col-md-4 col-sm-12 estimate-ship-tax"><!-- /table -->
 </div>
 <div class="col-md-4 col-sm-12 cart-shopping-total">
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>
-					
-					<div class="cart-grand-total">
-						Grand Total<span class="inner-left-md"><?php echo $_SESSION['tp']="$totalprice". ".00"; ?></span>
-					</div>
-				</th>
-			</tr>
-		</thead><!-- /thead -->
+  <table class="table table-bordered">
+		<!-- /thead -->
 		<tbody>
 				<tr>
 					<td>
 						<div class="cart-checkout-btn pull-right">
-							<button type="submit" name="ordersubmit" class="btn btn-primary">PROCCED TO CHEKOUT</button>
-						
-						</div>
+
+						<a href="ChatApp/index.php" class="btn btn-upper btn-primary outer-left-xs">Proceed to chat</a></div>
 					</td>
 				</tr>
 		</tbody><!-- /tbody -->
@@ -397,7 +277,8 @@ while($row=mysqli_fetch_array($query))
 	<?php } else {
 echo "Your shopping Cart is empty";
 		}?>
-</div>			</div>
+</div>			
+</div>
 		</div> 
 		</form>
 <?php echo include('includes/brands-slider.php');?>
@@ -440,4 +321,4 @@ echo "Your shopping Cart is empty";
 	</script>
 	<!-- For demo purposes – can be removed on production : End -->
 </body>
-</html>
+

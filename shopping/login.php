@@ -2,13 +2,12 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
-// Code user Registration
 if(isset($_POST['submit']))
 {
 $name=$_POST['fullname'];
 $email=$_POST['emailid'];
 $contactno=$_POST['contactno'];
-$password=md5($_POST['password']);
+$password=md5($_POST['password']);//hashing for password protection
 $query=mysqli_query($con,"insert into users(name,email,contactno,password) values('$name','$email','$contactno','$password')");
 if($query)
 {
@@ -27,7 +26,7 @@ $query=mysqli_query($con,"SELECT * FROM users WHERE email='$email' and password=
 $num=mysqli_fetch_array($query);
 if($num>0)
 {
-$extra="my-cart.php";
+$extra="index.php";
 $_SESSION['login']=$_POST['email'];
 $_SESSION['id']=$num['id'];
 $_SESSION['username']=$num['name'];
@@ -201,11 +200,11 @@ echo htmlentities($_SESSION['errmsg']="");
 <!-- create a new account -->
 <div class="col-md-6 col-sm-6 create-new-account">
 	<h4 class="checkout-subtitle">create a new account</h4>
-	<p class="text title-tag-line">Create your own Shopping account.</p>
+	<p class="text title-tag-line">Create your account</p>
 	<form class="register-form outer-top-xs" role="form" method="post" name="register" onSubmit="return valid();">
 <div class="form-group">
 	    	<label class="info-title" for="fullname">Full Name <span>*</span></label>
-	    	<input type="text" class="form-control unicase-form-control text-input" id="fullname" name="fullname" required="required">
+	    	<input type="text" class="form-control unicase-form-control text-input" id="fullname" name="fullname" required>
 	  	</div>
 
 
@@ -233,18 +232,7 @@ echo htmlentities($_SESSION['errmsg']="");
 
 	  	<button type="submit" name="submit" class="btn-upper btn btn-primary checkout-page-button" id="submit">Sign Up</button>
 	</form>
-	<span class="checkout-subtitle outer-top-xs">Sign Up Today And You'll Be Able To :  </span>
-	<div class="checkbox">
-	  	<label class="checkbox">
-		  	Speed your way through the checkout.
-		</label>
-		<label class="checkbox">
-		Track your orders easily.
-		</label>
-		<label class="checkbox">
- Keep a record of all your purchases.
-		</label>
-	</div>
+	<div class="checkbox"></div>
 </div>	
 <!-- create a new account -->			</div><!-- /.row -->
 		</div>

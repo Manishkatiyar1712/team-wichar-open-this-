@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
-$find="%{$_POST['product']}%";
+$find=$_SESSION['param'];
 if(isset($_GET['action']) && $_GET['action']=="add"){
 	$id=intval($_GET['id']);
 	if(isset($_SESSION['cart'][$id])){
@@ -12,7 +12,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 		$query_p=mysqli_query($con,$sql_p);
 		if(mysqli_num_rows($query_p)!=0){
 			$row_p=mysqli_fetch_array($query_p);
-			$_SESSION['cart'][$row_p['id']]=array("quantity" => 1, "price" => $row_p['productPrice']);
+			$_SESSION['cart'][$row_p['id']]=array("quantity" => 1, "price" => $row_p['productbook']);
 						echo "<script>alert('Product has been added to the cart')</script>";
 		echo "<script type='text/javascript'> document.location ='my-cart.php'; </script>";
 		}else{
@@ -210,13 +210,13 @@ while ($row=mysqli_fetch_array($ret))
 		
 		<div class="product-info text-left">
 			<h3 class="name"><a href="product-details.php?pid=<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['productName']);?></a></h3>
-			<div class="rating rateit-small"></div>
+			
 			<div class="description"></div>
 
 			<div class="product-price">	
 				<span class="price">
-					Rs. <?php echo htmlentities($row['productPrice']);?>			</span>
-										     <span class="price-before-discount">Rs.<?php echo htmlentities($row['productPriceBeforeDiscount']);?></span>
+					<?php echo htmlentities($row['productbook']);?>			</span>
+										     
 									
 			</div><!-- /.product-price -->
 			
@@ -226,10 +226,7 @@ while ($row=mysqli_fetch_array($ret))
 					<ul class="list-unstyled">
 						<li class="add-cart-button btn-group">
 					<?php if($row['productAvailability']=='In Stock'){?>
-										<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-								<i class="fa fa-shopping-cart"></i>													
-							</button>
-							<a href="category.php?page=product&action=add&id=<?php echo $row['id']; ?>">
+					<a href="category.php?page=product&action=add&id=<?php echo $row['id']; ?>">
 							<button class="btn btn-primary" type="button">Add to cart</button></a>
 								<?php } else {?>
 							<div class="action" style="color:red">Out of Stock</div>
@@ -237,11 +234,7 @@ while ($row=mysqli_fetch_array($ret))
 													
 						</li>
 	                   
-		                <li class="lnk wishlist">
-							<a class="add-to-cart" href="category.php?pid=<?php echo htmlentities($row['id'])?>&&action=wishlist" title="Wishlist">
-								 <i class="icon fa fa-heart"></i>
-							</a>
-						</li>
+		               
 
 						
 					</ul>

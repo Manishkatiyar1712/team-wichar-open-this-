@@ -128,7 +128,7 @@ return true;
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href="#">Home</a></li>
-				<li class='active'>Checkout</li>
+				<li class='active'>Account info</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
@@ -170,7 +170,7 @@ while($row=mysqli_fetch_array($query))
 					<form class="register-form" role="form" method="post">
 <div class="form-group">
 					    <label class="info-title" for="name">Name<span>*</span></label>
-					    <input type="text" class="form-control unicase-form-control text-input" value="<?php echo $row['name'];?>" id="name" name="name" required="required">
+					    <input type="text" class="form-control unicase-form-control text-input" value="<?php echo $row['name'];?>" id="name" name="name" required>
 					  </div>
 
 
@@ -181,7 +181,7 @@ while($row=mysqli_fetch_array($query))
 					  </div>
 					  <div class="form-group">
 					    <label class="info-title" for="Contact No.">Contact No. <span>*</span></label>
-					    <input type="text" class="form-control unicase-form-control text-input" id="contactno" name="contactno" required="required" value="<?php echo $row['contactno'];?>"  maxlength="10">
+					    <input type="text" class="form-control unicase-form-control text-input" id="contactno" name="contactno" required value="<?php echo $row['contactno'];?>"  maxlength="10">
 					  </div>
 					  <button type="submit" name="update" class="btn-upper btn btn-primary checkout-page-button">Update</button>
 					</form>
@@ -211,7 +211,7 @@ while($row=mysqli_fetch_array($query))
 					<form class="register-form" role="form" method="post" name="chngpwd" onSubmit="return valid();">
 <div class="form-group">
 					    <label class="info-title" for="Current Password">Current Password<span>*</span></label>
-					    <input type="password" class="form-control unicase-form-control text-input" id="cpass" name="cpass" required="required">
+					    <input type="password" class="form-control unicase-form-control text-input" id="cpass" name="cpass" required>
 					  </div>
 
 
@@ -222,7 +222,7 @@ while($row=mysqli_fetch_array($query))
 					  </div>
 					  <div class="form-group">
 					    <label class="info-title" for="Confirm Password">Confirm Password <span>*</span></label>
-					    <input type="password" class="form-control unicase-form-control text-input" id="cnfpass" name="cnfpass" required="required" >
+					    <input type="password" class="form-control unicase-form-control text-input" id="cnfpass" name="cnfpass" required >
 					  </div>
 					  <button type="submit" name="submit" class="btn-upper btn btn-primary checkout-page-button">Change </button>
 					</form> 

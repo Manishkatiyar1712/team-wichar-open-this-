@@ -20,7 +20,7 @@
 <div class="logo">
 	<a href="index.php">
 		
-		<h2>Shopping Portal</h2>
+		<h2>Book Barter</h2>
 
 	</a>
 </div>		
@@ -46,13 +46,11 @@ if(!empty($_SESSION['cart'])){
 	?>
 	<div class="dropdown dropdown-cart">
 		<a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
-			<div class="items-cart-inner">
+		  <div class="items-cart-inner">
 				<div class="total-price-basket">
-					<span class="lbl">cart -</span>
-					<span class="total-price">
-						<span class="sign">Rs.</span>
-						<span class="value"><?php echo $_SESSION['tp']; ?></span>
-					</span>
+					<span class="lbl">cart</span>
+					
+						
 				</div>
 				<div class="basket">
 					<i class="glyphicon glyphicon-shopping-cart"></i>
@@ -93,7 +91,7 @@ if(!empty($_SESSION['cart'])){
 						<div class="col-xs-7">
 							
 							<h3 class="name"><a href="product-details.php?pid=<?php echo $row['id'];?>"><?php echo $row['productName']; ?></a></h3>
-							<div class="price">Rs.<?php echo ($row['productPrice']+$row['shippingCharge']); ?>*<?php echo $_SESSION['cart'][$row['id']]['quantity']; ?></div>
+							<div class="price">Total<?php echo $_SESSION['cart'][$row['id']]['quantity']; ?></div>
 						</div>
 						
 					</div>
@@ -106,7 +104,7 @@ if(!empty($_SESSION['cart'])){
 			<div class="clearfix cart-total">
 				<div class="pull-right">
 					
-						<span class="text">Total :</span><span class='price'>Rs.<?php echo $_SESSION['tp']="$totalprice". ".00"; ?></span>
+						
 						
 				</div>
 			
@@ -124,14 +122,10 @@ if(!empty($_SESSION['cart'])){
 		<a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
 			<div class="items-cart-inner">
 				<div class="total-price-basket">
-					<span class="lbl">cart -</span>
-					<span class="total-price">
-						<span class="sign">Rs.</span>
-						<span class="value">00.00</span>
-					</span>
-				</div>
+				<span class="lbl">cart</span></div>
 				<div class="basket">
 					<i class="glyphicon glyphicon-shopping-cart"></i>
+
 				</div>
 				<div class="basket-item-count"><span class="count">0</span></div>
 			

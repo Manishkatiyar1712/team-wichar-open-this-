@@ -224,9 +224,8 @@ while ($row=mysqli_fetch_array($ret))
 
 			<div class="product-price">	
 				<span class="price">
-					Rs. <?php echo htmlentities($row['productPrice']);?>			</span>
-										     <span class="price-before-discount">Rs. <?php echo htmlentities($row['productPriceBeforeDiscount']);?></span>
-									
+					Book needed <?php echo htmlentities($row['productBook']);?>			</span>
+										    							
 			</div><!-- /.product-price -->
 			
 		</div><!-- /.product-info -->
